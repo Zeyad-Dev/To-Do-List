@@ -94,5 +94,26 @@ document.querySelector(".tasks").addEventListener("click", (e) => {
       });
       window.localStorage.setItem("tasks", JSON.stringify(updatedData));
     }
+  } else if (e.target.tagName === "P") {
+    e.target.parentElement.classList.toggle("completed");
+    if (e.target.parentElement.classList.contains("completed")) {
+      let Data = JSON.parse(window.localStorage.getItem("tasks"));
+      let updatedData = Data.map((a) => {
+        if (+a.id === +e.target.parentElement.getAttribute("id-text")) {
+          a.completed = true;
+        }
+        return a;
+      });
+      window.localStorage.setItem("tasks", JSON.stringify(updatedData));
+    } else {
+      let Data = JSON.parse(window.localStorage.getItem("tasks"));
+      let updatedData = Data.map((a) => {
+        if (+a.id === +e.target.parentElement.getAttribute("id-text")) {
+          a.completed = false;
+        }
+        return a;
+      });
+      window.localStorage.setItem("tasks", JSON.stringify(updatedData));
+    }
   }
 });
